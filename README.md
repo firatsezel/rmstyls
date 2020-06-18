@@ -27,12 +27,7 @@ unusedStyle3: {
 
 },
 
-After running main.py
-
-# rmstyls
-python program for removing unused jsx style codes from your project
-
-Example:
+After running main.py;
 
 container: {
   flex: 1,
