@@ -3,15 +3,16 @@
 
 #### Description
 
-A python program for removing unused jsx style codes from your project
+A python&Bash Script program for removing unused jsx style codes from your project
 
 ## How to run?
 
-`$ python main.py`
+`$ chmod +x rmstyls.sh`
+`$ ./rmstyls.sh`
 
 ### Dependencies
 
-`Python 2.7.16`
+`Python 2.7.16 or higher`
 
 ## Example
 ```javascript
@@ -44,7 +45,7 @@ unusedStyle3: {
 	backgroundColor: colors.page_bg_color,
 },
 
-// After Running main.py styles.js should like this
+// After Running rmstyls.sh styles.js should like this
 
 container: {
 	flex: 1,
