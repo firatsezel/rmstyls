@@ -1,3 +1,7 @@
+'''Written by firat sezel 2020 June
+    at least 2.7.16 python required to run
+    version number: 0.0.1'''
+
 import os
 
 class Style:
@@ -24,6 +28,49 @@ quitd = True
 while restart:
     ''' print dirname '''
     ''' f=open(dirname + "/styles.js", 'r') '''
+    f=open("./styles.js", 'r')
+    fl=f.readlines()
+    count=1
+    startFlag = 0 
+    endFlag = 0
+    cStyleName=''
+    cStyleStartLine=0
+    cStyleEndLine=0
+    for x in fl:
+        array=x.split(': {}', 1)
+        #print array
+        if len(array) == 2 and startFlag == 0:
+            array[0]=array[0].strip()
+            #print array[0]
+            cStyleName=array[0]
+            cStyleStartLine=count
+            cStyleEndLine=count
+            startFlag=1
+        if startFlag == 1:
+            item = Style(cStyleName, cStyleStartLine, cStyleEndLine)
+            startFlag = 0
+            with open('./index.js') as a:
+                #print item.name
+                if not 'styles.' + item.name in a.read():
+                    s=1
+                    with open("./styles.js", "r") as f:
+                        lines = f.readlines()
+                    with open("./styles.js", "w") as f:
+                        for line in lines:
+                            if not (s == int(item.startLine) or (s > int(item.startLine) and s < int(item.endLine)) or s == int(item.endLine)):
+                                f.write(line)
+                            s=s+1
+                    quitd = False
+                    a.close()
+                    f.close()
+                    #print item.name + ' in ' + './styles.js' + ' is removed'
+                    break
+            f.close()
+            a.close()
+            del item
+        count=count+1
+    f.close()
+    f.close()
     f=open("./styles.js", 'r')
     fl=f.readlines()
     
@@ -75,47 +122,6 @@ while restart:
         count=count+1
     f.close()
     f.close()
-    f=open("./styles.js", 'r')
-    fl=f.readlines()
-    count=1
-    startFlag = 0 
-    endFlag = 0
-    cStyleName=''
-    cStyleStartLine=0
-    cStyleEndLine=0
-    for x in fl:
-        array=x.split(': {}', 1)
-        #print array
-        if len(array) == 2 and startFlag == 0:
-            array[0]=array[0].strip()
-            #print array[0]
-            cStyleName=array[0]
-            cStyleStartLine=count
-            cStyleEndLine=count
-            startFlag=1
-        if startFlag == 1:
-            item = Style(cStyleName, cStyleStartLine, cStyleEndLine)
-            startFlag = 0
-            with open('./index.js') as a:
-                #print item.name
-                if not 'styles.' + item.name in a.read():
-                    s=1
-                    with open("./styles.js", "r") as f:
-                        lines = f.readlines()
-                    with open("./styles.js", "w") as f:
-                        for line in lines:
-                            if not (s == int(item.startLine) or (s > int(item.startLine) and s < int(item.endLine)) or s == int(item.endLine)):
-                                f.write(line)
-                            s=s+1
-                    quitd = False
-                    a.close()
-                    f.close()
-                    #print item.name + ' in ' + './styles.js' + ' is removed'
-                    break
-            f.close()
-            a.close()
-            del item
-        count=count+1
     if quitd == True:
         restart = False
 f.close()
